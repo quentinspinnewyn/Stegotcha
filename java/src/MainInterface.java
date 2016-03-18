@@ -87,6 +87,11 @@ public class MainInterface {
         userDest.setForeground(Color.BLACK);
         userDest.setFont(new Font("", Font.BOLD, 12));
         p.add(userDest);
+        
+        JButton envoi = new JButton("Envoyer");
+        envoi.setBounds(800,680,150,20);
+        envoi.setFont(new Font("", Font.BOLD, 12));
+        p.add(envoi);
 
 
         f.setContentPane(p);
