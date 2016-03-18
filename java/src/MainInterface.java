@@ -15,6 +15,7 @@ public class MainInterface {
         Dimension dim = new Dimension(1000, 800);
 
         JFrame f = new JFrame();
+        f.setTitle("Chat stéganographique");
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setResizable(false);
         f.setSize(dim);
