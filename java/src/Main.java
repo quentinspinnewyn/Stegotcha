@@ -12,11 +12,14 @@ import java.io.IOException;
  */
 public class Main {
 
+    public Steganographie steghide = new Steganographie();
+    private String p;
+
     public static void main(String[] args) {
 
-        Steganographie steghide = new Steganographie();
-        steghide.insert("Test 1", "pass");
-        System.out.println("Result is \""+steghide.extract("avatar.jpg", "pass")+"\"");
+        Main main = new Main();
+        main.p = main.steghide.p;
+        MainInterface mi = new MainInterface();
 
     }
 
@@ -41,7 +44,7 @@ public class Main {
      */
     public void send(String msg, String coverMsg, String destinataire) {
         textToImage(coverMsg);
-        insert(msg, destinataire);
+        steghide.insert(msg, destinataire);
         File dest = new File("resources"+p+"cover.bmp");
         /*
             send cover.bmp TO destinataire (call Server.sendTo(String pseudo) )
