@@ -6,8 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
+ * The main Operating class. Using the steghide command to embed or extract the messages.
+ * 
  * Created by Alexandre on 16/03/2016.
- *
  */
 public class Steganographie {
 
