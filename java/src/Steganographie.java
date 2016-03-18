@@ -25,10 +25,15 @@ public class Steganographie {
         }
     }
 
-    protected void insert(String embedTxt, String cover, String passphrase) {
+    /**
+     * Embed the embedTxt into cover.bmp using the passphrase param
+     * @param embedTxt
+     * @param passphrase
+     */
+    protected void insert(String embedTxt, String passphrase) {
         System.out.println("Starting Insertion");
         File tmp = new File ("resources"+p+"embedMsg.txt");
-        File coverFile = new File ("resources"+p+cover);
+        File coverFile = new File ("resources"+p+"cover.bmp");
         try {
             FileWriter fw = new FileWriter(tmp);
             fw.write(embedTxt);
@@ -37,15 +42,9 @@ public class Steganographie {
             System.out.println("Erreur lors de l'écriture du message : "+e.getMessage());
         }
         String[] cmd;
-        if (tmp.length()<cover.length()) {
+        if (tmp.length()<coverFile.length()) {
             System.out.println("Embed text has a correct length.");
-            cmd = new String[]{"", "embed", "-ef resources" + p + "embedMsg.txt", "-cf " + "resources" + p + "cover", "-p " + passphrase, "-z 9"};
-
-            /** TODO:
-             *  Vérifier si taille embed > taille cover
-             *  si oui : augmenter compression
-             *  Traitement message d'erreur !
-             */
+            cmd = new String[]{"", "embed", "-ef resources" + p + "embedMsg.txt", "-cf " + "resources" + p +"cover.bmp", "-p " + passphrase, "-z 9"};
 
             if (os.contains("Windows")) {
                 System.out.println("Windows OS detected");
@@ -71,10 +70,15 @@ public class Steganographie {
         System.out.println("Insertion ended");
     }
 
-    protected String extract(String target, String passphrase) {
+    /**
+     * Extract msg from recep.bmp using passphrase param.
+     * @param passphrase
+     * @return Embeded text
+     */
+    protected String extract(String passphrase) {
         System.out.println("Starting Extraction");
         File tmp = new File ("resources"+p+"embedMsg.txt");
-        String[] cmd = new String[]{"","extract", "-sf resources"+p+target, "-xf resources"+p+"extractMsg.txt", "-p "+passphrase};
+        String[] cmd = new String[]{"","extract", "-sf resources"+p+"recep.bmp", "-xf resources"+p+"extractMsg.txt", "-p "+passphrase};
         if (os.contains("Windows")) {
             System.out.println("Windows OS detected");
             cmd[0]="resources"+p+"steghide"+p+"steghide.exe";
